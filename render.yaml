@@ -1,9 +1,13 @@
+# Borra el archivo actual
+rm render.yaml
+
+# Crea uno nuevo
+cat > render.yaml << 'EOF'
 services:
   - type: web
     name: barkley-lms
     env: docker
-    region: ohio
-    plan: standard
+    region: oregon
     dockerfilePath: ./Dockerfile
     envVars:
       - key: RAILS_ENV
@@ -20,14 +24,21 @@ services:
 
   - type: redis
     name: barkley-cache
-    region: ohio
+    region: oregon
     plan: starter
-    maxmemoryPolicy: allkeys-lru
     ipAllowList: []
 
 databases:
   - name: barkley-db
-    region: ohio
-    plan: starter
+    region: oregon
     databaseName: barkley_production
-    user: barkley_user
+    user: barkley
+EOF
+
+# Verifica que se creó correctamente
+cat render.yaml
+
+# Sube a Git
+git add render.yaml
+git commit -m "Recreate render.yaml from scratch"
+git push origin master
