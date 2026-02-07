@@ -22,9 +22,12 @@ services:
   - type: redis
     name: barkley-cache
     plan: starter
+    region: ohio
     ipAllowList: []
 
 databases:
   - name: barkley-db
     plan: standard
-    postgresMajorVersion: 14
+    region: ohio
+    databaseName: barkley_production
+    user: barkley
