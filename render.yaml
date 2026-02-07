@@ -2,10 +2,9 @@ services:
   - type: web
     name: barkley-lms
     env: docker
-    plan: standard
     region: ohio
-    dockerContext: .
-    dockerfilePath: Dockerfile
+    plan: standard
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: RAILS_ENV
         value: production
@@ -15,19 +14,20 @@ services:
           property: connectionString
       - key: REDIS_URL
         fromService:
-          type: redis
           name: barkley-cache
+          type: redis
           property: connectionString
 
   - type: redis
     name: barkley-cache
-    plan: starter
     region: ohio
+    plan: starter
+    maxmemoryPolicy: allkeys-lru
     ipAllowList: []
 
 databases:
   - name: barkley-db
-    plan: standard
     region: ohio
+    plan: starter
     databaseName: barkley_production
-    user: barkley
+    user: barkley_user
