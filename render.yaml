@@ -22,7 +22,7 @@ services:
   - type: redis
     name: barkley-cache
     plan: starter
-    ipAllowList: [] # Esto permite que tus servicios internos se conecten sin problemas
+    ipAllowList: []
 
 databases:
   - name: barkley-db
