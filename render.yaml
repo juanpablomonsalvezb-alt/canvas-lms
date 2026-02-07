@@ -1,8 +1,3 @@
-# Borra el archivo actual
-rm render.yaml
-
-# Crea uno nuevo CON INDENTACIÓN CORRECTA
-cat > render.yaml << 'EOF'
 services:
   - type: web
     name: barkley-lms
@@ -26,18 +21,9 @@ services:
     region: oregon
     plan: starter
     ipAllowList: []
-
 databases:
   - name: barkley-db
     region: oregon
     databaseName: barkley_production
     user: barkley
-EOF
-
-# Verifica
-cat render.yaml
-
-# Sube a Git
-git add render.yaml
-git commit -m "Fix YAML indentation"
-git push origin master
+    
