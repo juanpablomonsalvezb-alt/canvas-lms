@@ -1,4 +1,4 @@
-services:
+sservices:
   - type: web
     name: barkley-lms
     env: docker
@@ -19,12 +19,11 @@ services:
           name: barkley-cache
           property: connectionString
 
+  - type: redis
+    name: barkley-cache
+    plan: starter
+
 databases:
   - name: barkley-db
     plan: standard
     postgresMajorVersion: 14
-
-services:
-  - type: redis
-    name: barkley-cache
-    plan: starterss
