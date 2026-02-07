@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: barkley-lms
+    env: docker
+    plan: standard
+    region: ohio
+    dockerContext: .
+    dockerfile: Dockerfile
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barkley-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: barkley-cache
+          property: connectionString
+
+databases:
+  - name: barkley-db
+    plan: standard
+    postgresMajorVersion: 14
+
+services:
+  - type: redis
+    name: barkley-cache
+    plan: starterss
